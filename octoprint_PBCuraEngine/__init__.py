@@ -311,6 +311,7 @@ class PBCuraEnginePlugin(octoprint.plugin.SlicerPlugin,
             'CURA_ENGINE_SEARCH_PATH':':'.join(search_path_var)
         }
         self._logger.info(env)
+        import multiprocessing
         args = [
             cura_path,
             'slice',
@@ -318,11 +319,13 @@ class PBCuraEnginePlugin(octoprint.plugin.SlicerPlugin,
             profile_path,
             '-v',
             '-p',
+            '-m'+str(multiprocessing.cpu_count()),
             '-o',
             machinecode_path,
             '-l',
             model_path
         ]
+        insert_index = args.index('-o')-1
 
         if isinstance(slice_vars,type({})):
             profile_metadata = slice_vars.get('metadata')
@@ -330,8 +333,8 @@ class PBCuraEnginePlugin(octoprint.plugin.SlicerPlugin,
                 print_settings = profile_metadata.get('octoprint_settings')
                 if isinstance(print_settings,type({})):
                     for key in sorted(print_settings):
-                        args.insert(6,key+'='+str(print_settings[key]))
-                        args.insert(6,'-s')
+                        args.insert(insert_index,key+'='+str(print_settings[key]))
+                        args.insert(insert_index,'-s')
 
         my_result = ''
 
