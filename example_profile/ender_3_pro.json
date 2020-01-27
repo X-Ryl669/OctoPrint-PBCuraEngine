@@ -1,0 +1,51 @@
+{
+    "name": "Creality Ender-3 0.4",
+    "version": 2,
+    "inherits": "creality_ender3",
+    "metadata": {
+        "quality_definition": "creality_ender3",
+        "visible": true,
+        "platform": "creality_ender3.stl",
+        "octoprint_settings":{
+            "material_bed_temp_wait":false,
+            "material_print_temp_wait":true,
+            "default_material_bed_temperature":52,
+            "material_bed_temperature":52,
+            "material_bed_temperature_layer_0":52,
+            "default_material_print_temperature":200,
+            "material_print_temperature":200,
+            "material_print_temperature_layer_0":200,
+            "line_width":0.3,
+            "layer_height":0.12,
+            "infill_sparse_density":20,
+            "infill_pattern":"cubic",
+            "wall_thickness":1.2,
+            "top_bottom_thickness":1.2,
+            "travel_avoid_other_parts":true,
+            "retraction_combing":"noskin",
+            "optimize_wall_printing_order":false,
+            "infill_enable_travel_optimization":false,
+            "z_seam_type":"sharpest_corner",
+            "z_seam_corner":"z_seam_corner_weighted",
+            "ironing_enabled":true,
+            "support_enable":false,
+            "support_type":"buildplate",
+            "adhesion_type":"skirt",
+            "skirt_line_count":5
+        }
+    },
+    "overrides": {
+        "machine_start_gcode": {
+            "default_value": ";start gcode script\nM117 Poking angry pixies\nG21        ;metric values\nG90        ;absolute positioning\nM82        ;set extruder to absolute mode\nM107       ;start with the fan off\n\nG91            ; Set to relative positioning\nG28 X0 Y0 Z0   ; Home all three axes\nG90            ; Set to absolute positioning\n\n\nG29            ; Run the autolevel routine\n;G29 L0\n;G29 J\n\n\nM117 RELEASE THE SMOOOO!\nG1 Z1.0 F3000 ; move z up little to prevent scratching of surface\nG1 X0.1 Y4 Z0.2 F5000.0 ; move to start-line position\nG92 E0 ; reset extruder\nG1 X40 E35 F300 ; Extrude 25mm of filament in a 4cm line\nG92 E0 ; reset extruder\nG1 E-1 F500 ; Retract a little\nG1 X80 F4000 ; Quickly wipe away from the filament line\nG1 Z0.2 F3000 ; move z up little to prevent scratching of surface\n\n;Put printing message on LCD screen\nM117 Printing...\n;M851 Z-0.875   ; BLTouch height\nM851 Z-0.950   ; BLTouch height\n"
+        },
+        "machine_end_gcode": {
+            "default_value": ";end gcode script\nM104 S0                     ;extruder heater off\nM140 S0                     ;heated bed heater off (if you have it)\n\nG91                                    ;relative positioning\nG1 E-2 F300                            ;retract the filament a bit before lifting the nozzle, to release some of the pressure\nG1 Z+5 E-5 F{travel_speed} ;move Z up a bit and retract filament even more\nG1 X-20 Y-20 F{travel_speed} ;move a bit\nG28 X0 Y0                              ;move X/Y to min endstops, so the head is out of the way\n\nM84                         ;steppers off\nG90                         ;absolute positioning\n"
+        },
+
+        "gantry_height": { "default_value": 25, "value": 25 },
+
+        "extruder_nr": { "default_value": 0 },
+        "machine_nozzle_size": { "default_value": 0.4 },
+        "material_diameter": { "default_value": 1.75 }
+    }
+}

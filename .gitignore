@@ -124,3 +124,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
+# Don't include Cura's profiles in our repo, because the user needs to choose a
+# version which needs to match the CuraEngine and libArcus versions
+octoprint_PBCuraEngine/profiles/*
+!octoprint_PBCuraEngine/profiles/keep_folder
+

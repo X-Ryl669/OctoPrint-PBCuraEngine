@@ -1,0 +1,23 @@
+<h4>{{ _('General') }}</h4>
+
+<p>{% trans %}
+    Specify the path to the CuraEngine binary. Note that only
+    <strong>versions above 4.4 or higher</strong> are supported.
+{% endtrans %}</p>
+
+<form class="form-horizontal">
+    {% include "snippets/settings/PBCuraEngine/enginePath.jinja2" %}
+    {% include "snippets/settings/PBCuraEngine/engineLog.jinja2" %}
+</form>
+
+<h4>{{ _('Profiles') }}</h4>
+
+{% include "snippets/settings/PBCuraEngine/profiles.jinja2" %}
+
+<button class="btn pull-right" data-bind="click: function() { console.log($root); $root.showImportProfileDialog() }">{{ _('Import Profile...') }}</button>
+
+<div style="clear: both">
+    <small>{% trans %}For more information on configuration and usage please <a href="{{ plugin_PBCuraEngine_homepage }}" target="_blank">see the Plugin's homepage</a>.{% endtrans %}</small>
+</div>
+
+{% include "snippets/settings/PBCuraEngine/profileImporter.jinja2" %}
