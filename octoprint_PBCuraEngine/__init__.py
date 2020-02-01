@@ -1,24 +1,6 @@
 # coding=utf-8
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-'''
-
-These settings are required in config.yaml for this to work:
-
-plugins:
-  PBCuraEngine:
-    cura_engine: /home/pi/CuraEngine/build/CuraEngine
-    default_profile: /home/pi/.octoprint/slicingProfiles/PBCuraEngine/Test_One.profile
-
-
-Additionally, the limitation with slicing profiles can be avoided by entering the following:
-
-slicing:
-  defaultProfiles:
-    PBCuraEngine: Test_One
-
-'''
-
 import logging
 import logging.handlers
 import subprocess
@@ -210,9 +192,15 @@ class PBCuraEnginePlugin(octoprint.plugin.SlicerPlugin,
         # fixme: ignores overrides. These should be blended with
         # the profile.
         # fixme: no belts or suspenders here. Add error checking.
-        # overrides is a dict
+        new_profile = profile.data
+        if isinstance(overrides,type({}))==True:
+            if not 'metadata' in new_profile:
+                new_profile['metadata'] = {}
+                if not 'octoprint_settings' in new_profile['metadata']:
+                    new_profile['metadata']['octoprint_settings'] = {}
+            new_profile['metadata']['octoprint_settings'].update(overrides)
         file_handle = open(path, 'w')
-        json.dump(profile.data, file_handle, indent=4, sort_keys=True)
+        json.dump(new_profile, file_handle, indent=4, sort_keys=True)
         file_handle.close()
 
     def on_after_startup(self):
@@ -359,7 +347,7 @@ class PBCuraEnginePlugin(octoprint.plugin.SlicerPlugin,
                 p.commands[0].poll()
                 continue
 
-            self._logger.info(line.strip())
+            # self._logger.info(line.strip())
 
             # measure progress
             if line[-2:-1] == '%':
@@ -405,7 +393,7 @@ class PBCuraEnginePlugin(octoprint.plugin.SlicerPlugin,
 
     def get_template_vars(self):
         return dict(
-            homepage='https://github.com/OctoPrint/OctoPrint-CuraEngineLegacy/'
+            homepage='https://github.com/Red-M/OctoPrint-PBCuraEngine/'
         )
 
     ##~~ AssetPlugin API
