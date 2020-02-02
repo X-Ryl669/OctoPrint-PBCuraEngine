@@ -198,7 +198,11 @@ class PBCuraEnginePlugin(octoprint.plugin.SlicerPlugin,
                 new_profile['metadata'] = {}
                 if not 'octoprint_settings' in new_profile['metadata']:
                     new_profile['metadata']['octoprint_settings'] = {}
-            new_profile['metadata']['octoprint_settings'].update(overrides)
+                new_profile['metadata']['octoprint_settings'].update(overrides)
+                for key in new_profile['metadata']['octoprint_settings']:
+                    rename_key = 'profile.'
+                    if key.startswith(rename_key)==True:
+                        new_profile['metadata']['octoprint_settings'][key[len(rename_key)+1:]] = new_profile['metadata']['octoprint_settings'].pop(key)
         file_handle = open(path, 'w')
         json.dump(new_profile, file_handle, indent=4, sort_keys=True)
         file_handle.close()
@@ -347,7 +351,7 @@ class PBCuraEnginePlugin(octoprint.plugin.SlicerPlugin,
                 p.commands[0].poll()
                 continue
 
-            # self._logger.info(line.strip())
+            self._logger.info(line.strip())
 
             # measure progress
             if line[-2:-1] == '%':
