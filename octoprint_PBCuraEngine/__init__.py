@@ -333,7 +333,7 @@ class PBCuraEnginePlugin(octoprint.plugin.SlicerPlugin,
         self._logger.info(' '.join(args))
 
         import sarge
-        p = sarge.run(args, async=True,
+        p = sarge.run(args, async_=True,
                       stdout=sarge.Capture(),
                       stderr=sarge.Capture(),
                       env=env)
