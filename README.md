@@ -25,9 +25,10 @@ This has been tested to work with 4.9 but should work with any version of CuraEn
 To use the script, run `./install_curaengine.sh 4.9`. The script will ask for your account password multiple time using sudo.
 Once the install script has finished, you'll need to run `./get_cura_profiles.sh $PLUGIN_DIR 4.9` with `$PLUGIN_DIR`
 being the location octoprint has installed this plugin to,
-for example on an octopi, this is `/home/pi/Octoprint/venv/lib/python3.7/site-packages/octoprint_PBCuraEngine`.
-You can get the install location by looking in ocotprint's settings under the
+for example on an octopi, this is `/home/pi/OctoPrint/venv/lib/python3.7/site-packages/octoprint_PBCuraEngine`.
+You can get the install location by looking in octoprint's settings under the
 plugin manager section there is "Using pip of <blah>", expand that and there is the install directory location.
+
 Simply add `/octoprint_PBCuraEngine` to this directory location to get `$PLUGIN_DIR`.
 You can change `4.9` used previously if you wish to use another version or for upgrades to CuraEngine.
 
@@ -49,6 +50,7 @@ For how to set up a slicing profile, see my exaple profile for my Creality Ender
 ### Cura Settings.json
 
 CuraEngine recently (in terms of versions) changed how profiles work.
+
 My example printer profile is a great example of how this works and reading through it while reading this is highly recommended.
 Basically its an inheritance system now, so for a custom profile all you need to do is
 inherit from your own printer's existing profile (if one exists) then you can do changes in your profile.
