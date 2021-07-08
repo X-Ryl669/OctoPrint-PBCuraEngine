@@ -1,3 +1,5 @@
+Based on Red-M fork of PrintrBot's CuraEngine plugin.
+
 # OctoPrint-PBCuraEngine
 
 PBCuraEngine is a plugin that adds the 'latest' CuraEngine slicer to
