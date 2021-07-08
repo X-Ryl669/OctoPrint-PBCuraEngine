@@ -11,22 +11,23 @@ to be super-clear, this plugin uses ["vanilla" CuraEngine](https://github.com/Ul
 Install via the bundled [Plugin Manager](https://github.com/foosel/OctoPrint/wiki/Plugin:-Plugin-Manager)
 or manually using this URL:
 
-      https://github.com/Red-M/OctoPrint-PBCuraEngine/archive/master.zip
+      https://github.com/X-Ryl669/OctoPrint-PBCuraEngine/archive/master.zip
 
 To use this plugin, you must have [CuraEngine](https://github.com/Ultimaker/CuraEngine/blob/master/README.md)
 and its dependencies installed on your system. This plugin was
-originally integrated with the version 3.x CuraEngine code and has since been tested working on 4.4.
+originally integrated with the version 3.x CuraEngine code and has since been tested working on 4.9.
 
 There is an install script in the scripts directory of this repository to install CuraEngine.
-This has been tested to work with 4.4 but should work with any version of CuraEnging.
-To use the script, run `./install_curaengine.sh 4.4` as root (using sudo is fine, just make sure to use the `-i` option).
-Once the install script has finished, you'll need to run `./get_cura_profiles.sh $PLUGIN_DIR 4.4` with `$PLUGIN_DIR`
+This has been tested to work with 4.9 but should work with any version of CuraEngine.
+
+To use the script, run `./install_curaengine.sh 4.9`. The script will ask for your account password multiple time using sudo.
+Once the install script has finished, you'll need to run `./get_cura_profiles.sh $PLUGIN_DIR 4.9` with `$PLUGIN_DIR`
 being the location octoprint has installed this plugin to,
-for example on an octopi, this is `/home/pi/oprint/lib/python2.7/site-packages/octoprint_PBCuraEngine`.
+for example on an octopi, this is `/home/pi/Octoprint/venv/lib/python3.7/site-packages/octoprint_PBCuraEngine`.
 You can get the install location by looking in ocotprint's settings under the
 plugin manager section there is "Using pip of <blah>", expand that and there is the install directory location.
 Simply add `/octoprint_PBCuraEngine` to this directory location to get `$PLUGIN_DIR`.
-You can change `4.4` used previously if you wish to use another version or for upgrades to CuraEngine.
+You can change `4.9` used previously if you wish to use another version or for upgrades to CuraEngine.
 
 For updating CuraEngine, all you should need to do is run `./install_curaengine.sh $CURAENGINE_VERSION` as root, where `$CURAENGINE_VERSION` is the git branch of [CuraEngine](https://github.com/Ultimaker/CuraEngine).
 
